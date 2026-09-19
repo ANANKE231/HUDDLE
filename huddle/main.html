@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ka" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ზღურბლი — თანამშრომლის ადაპტაციის პლატფორმა</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@300;400;500;600;700&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+<!-- ══════════ LIGHT LAYER (fixed, reacts to scroll) ══════════
+     Same light language as the banner: soft navy bloom at the top,
+     white-hot ribbons that fade through steel-blue into black. -->
+<div class="lights" id="lights" aria-hidden="true">
+  <div class="light-bloom" id="lightBloom"></div>
+  <svg class="light-svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <!-- ribbon body: across the ribbon → dark / blue / white core / blue / dark -->
+      <linearGradient id="gBodyA" gradientUnits="userSpaceOnUse" x1="120" y1="760" x2="880" y2="180">
+        <stop offset="0"    stop-color="#1B2A55" stop-opacity="0"/>
+        <stop offset=".28"  stop-color="#4E76D6" stop-opacity=".55"/>
+        <stop offset=".52"  stop-color="#FFFFFF" stop-opacity="1"/>
+        <stop offset=".70"  stop-color="#8FA9E6" stop-opacity=".7"/>
+        <stop offset="1"    stop-color="#1B2A55" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="gBodyB" gradientUnits="userSpaceOnUse" x1="700" y1="1000" x2="1300" y2="520">
+        <stop offset="0"    stop-color="#1B2A55" stop-opacity="0"/>
+        <stop offset=".35"  stop-color="#4E76D6" stop-opacity=".5"/>
+        <stop offset=".62"  stop-color="#EAF0FF" stop-opacity=".95"/>
+        <stop offset="1"    stop-color="#1B2A55" stop-opacity="0"/>
+      </linearGradient>
+      <!-- thin bright edge that runs along the ribbon crest -->
+      <linearGradient id="gEdge" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0"   stop-color="#fff" stop-opacity="0"/>
+        <stop offset=".35" stop-color="#fff" stop-opacity=".95"/>
+        <stop offset=".8"  stop-color="#C4D2F5" stop-opacity=".5"/>
+        <stop offset="1"   stop-color="#C4D2F5" stop-opacity="0"/>
+      </linearGradient>
+      <filter id="fBlurBig" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="34"/></filter>
+      <filter id="fBlurMid" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="11"/></filter>
+      <filter id="fBlurEdge" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3.2"/></filter>
+    </defs>
+
+    <!-- Ribbon A : rises from the left edge, folds down through the page -->
+    <g id="ribbonA">
+      <path filter="url(#fBlurBig)" fill="url(#gBodyA)" opacity=".85"
+        d="M-160 250 C 250 205 540 380 790 760 C 860 866 930 970 1040 1090
+           L 620 1090 C 520 890 420 700 300 590 C 180 490 20 420 -160 430 Z"/>
+      <path filter="url(#fBlurMid)" fill="url(#gBodyA)" opacity=".9"
+        d="M-160 262 C 240 226 520 396 770 750 C 840 850 900 950 990 1060
+           L 700 1060 C 560 860 450 690 320 600 C 190 510 40 452 -160 458 Z"/>
+      <path filter="url(#fBlurEdge)" fill="none" stroke="url(#gEdge)" stroke-width="3.5" stroke-linecap="round"
+        d="M-160 252 C 240 214 530 386 780 756 C 850 858 915 955 1010 1075"/>
+    </g>
+
+    <!-- Ribbon B : low arc lifting in from the right -->
+    <g id="ribbonB">
+      <path filter="url(#fBlurBig)" fill="url(#gBodyB)" opacity=".8"
+        d="M560 1110 C 840 850 1150 640 1620 596 L 1620 960
+           C 1280 800 1030 930 900 1110 Z"/>
+      <path filter="url(#fBlurMid)" fill="url(#gBodyB)" opacity=".85"
+        d="M640 1100 C 900 860 1180 668 1620 630 L 1620 900
+           C 1300 786 1060 900 940 1100 Z"/>
+      <path filter="url(#fBlurEdge)" fill="none" stroke="url(#gEdge)" stroke-width="3" stroke-linecap="round"
+        d="M600 1108 C 870 860 1170 654 1620 612"/>
+    </g>
+  </svg>
+  <div class="light-spot" id="lightSpot"></div>
+</div>
+
+
+<header class="topbar" id="topbar">
+  <div class="topbar-inner">
+    <a class="logo" href="#top" aria-label="HUDDLE">
+      <svg class="logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="11" cy="7.5" r="4" fill="#F2F5FB"/>
+        <rect x="7" y="12" width="8" height="16" rx="4" fill="#F2F5FB"/>
+        <circle cx="21.5" cy="7.5" r="4" fill="#A8BCE8"/>
+        <rect x="17.5" y="12" width="8" height="16" rx="4" fill="#A8BCE8"/>
+        <path d="M7 22c4-8 14-8 18.5-2v4C21 18 11 18 7 26z" fill="#F2F5FB" fill-opacity=".45"/>
+      </svg>
+      HUDDLE
+    </a>
+    <nav class="nav-links" aria-label="მთავარი ნავიგაცია">
+      <a href="#how">როგორ მუშაობს</a>
+      <a href="#sides">დირექტორი &amp; თანამშრომელი</a>
+      <a href="#pricing">ფასი</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="მენიუ" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="scroll-line" id="scrollLine"></div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#how">როგორ მუშაობს</a>
+  <a href="#sides">დირექტორი &amp; თანამშრომელი</a>
+  <a href="#pricing">ფასი</a>
+</div>
+
+<main id="top">
+
+  <!-- ══════════ HERO ══════════ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <div class="tagline lat" aria-hidden="true">Join <i>/</i> Collaborate <i>/</i> Grow</div>
+        <h1>ახალი თანამშრომლის პირველი კვირა, მოწესრიგებული ერთ სივრცეში</h1>
+        <p class="lead">ატვირთეთ სასწავლო მასალა, დაუწესეთ ვადა და ნახეთ პროგრესი რეალურ დროში — დირექტორისთვის სრული სურათი, თანამშრომლისთვის მხოლოდ საკუთარი გზა.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#pricing">დაიწყეთ, როგორც დირექტორი — $19.99/თვე</a>
+          <a class="btn btn-ghost" href="#how">როგორ მუშაობს</a>
+        </div>
+      </div>
+
+      <div class="join-card" id="joinCard">
+        <div class="join-card-label">უკვე დარეგისტრირებული კომპანია ხართ?</div>
+        <div class="join-step" id="joinStepCode">
+          <div class="join-row">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="9" cy="9" r="6.2"/><path d="M17 17l-3.8-3.8" stroke-linecap="round"/></svg>
+            <input type="text" id="companyCode" placeholder="კომპანიის კოდი, მაგ. ORB-4471" autocomplete="off" aria-label="კომპანიის კოდი">
+            <button id="findCompany">მოძებნა</button>
+          </div>
+          <p class="join-hint">კოდი მოცემულია თქვენი დირექტორის მიერ, რეგისტრაციისას მინიჭებული.</p>
+        </div>
+        <div class="join-step join-step-pass" id="joinStepPass">
+          <div class="join-found">
+            <div class="found-dot"></div>
+            <div><b id="foundName">კომპანია მოიძებნა</b><span>შეიყვანეთ პაროლი, რომელიც მოგაწოდათ დირექტორმა</span></div>
+          </div>
+          <div class="join-row">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="5" y="9" width="10" height="7" rx="1.6"/><path d="M7 9V6.7a3 3 0 0 1 6 0V9"/></svg>
+            <input type="password" id="companyPass" placeholder="პაროლი" autocomplete="off" aria-label="პაროლი">
+            <button id="submitJoin">გაწევრიანება</button>
+          </div>
+          <button class="join-back" id="joinBack">← სხვა კოდის შეყვანა</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ HOW IT WORKS ══════════ -->
+  <section class="section" id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>როგორ მუშაობს ზღურბლი</h2>
+        <p>ერთი პლატფორმა ორი მხარისთვის — კომპანიისთვის (დირექტორი, HR) და თანამშრომლისთვის, ახლისთვისაც და არსებულისთვისაც.</p>
+      </div>
+
+      <ol class="timeline" id="timeline">
+        <li class="tl-item">
+          <div class="tl-marker"><span class="lat">01</span></div>
+          <div class="tl-body">
+            <h3>რეგისტრაცია და კომპანიის კოდი</h3>
+            <p>დირექტორი ან HR რეგისტრირდება, იხდის $19.99-ს თვეში და იღებს კომპანიის უნიკალურ კოდსა და პაროლს — სწორედ ამით უერთდებიან თანამშრომლები.</p>
+          </div>
+        </li>
+        <li class="tl-item">
+          <div class="tl-marker"><span class="lat">02</span></div>
+          <div class="tl-body">
+            <h3>სასწავლო მასალის ატვირთვა</h3>
+            <p>დირექტორი ტვირთავს ვიდეოებს, საგანმანათლებლო ტექსტებს ან სხვა ფაილებს — თითოეული ტიპისთვის ცალკე ველით — და ადგენს ვადას, მაგალითად, ორ კვირას.</p>
+          </div>
+        </li>
+        <li class="tl-item">
+          <div class="tl-marker"><span class="lat">03</span></div>
+          <div class="tl-body">
+            <h3>თანამშრომელი უერთდება და სწავლობს</h3>
+            <p>ახალი თუ არსებული თანამშრომელი კომპანიის კოდითა და პაროლით უერთდება, უყურებს ვიდეოებს, კითხულობს ტექსტებს, ჩამოტვირთავს ფაილებს და ასრულებს დავალებულ ამოცანებს.</p>
+          </div>
+        </li>
+        <li class="tl-item">
+          <div class="tl-marker"><span class="lat">04</span></div>
+          <div class="tl-body">
+            <h3>პროგრესის თვალყურის დევნება</h3>
+            <p>დირექტორი რეალურ დროში ხედავს, რომელი მასალა ნანახია, რომელი ტექსტია წაკითხული და რამდენი პროცენტია დასრულებული — თითოეული თანამშრომლისთვის ცალკე.</p>
+          </div>
+        </li>
+        <li class="tl-item">
+          <div class="tl-marker"><span class="lat">05</span></div>
+          <div class="tl-body">
+            <h3>დასკვნითი შეფასება, დირექტორის არჩევანით</h3>
+            <p>ვადის ამოწურვისას იხსნება შეფასება. დირექტორს შეუძლია აირჩიოს 30 კითხვიანი ტესტი, შემოსაზღვრული დროით — მაგალითად, 30 წუთი — ან მოსთხოვოს თანამშრომელს წერითი პასუხი, ვთქვათ, 500 ან 1000 სიტყვის ესეს სახით.</p>
+          </div>
+        </li>
+        <li class="tl-item">
+          <div class="tl-marker"><span class="lat">06</span></div>
+          <div class="tl-body">
+            <h3>შედეგების მიღება და შეფასება</h3>
+            <p>დირექტორი იღებს თანამშრომლის პასუხებს ან ესეს და აფასებს ნამუშევარს. თანამშრომელი კი ხედავს მხოლოდ საკუთარ შედეგსა და შეფასებას — არაფერი ზედმეტი.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ══════════ TWO SIDES ══════════ -->
+  <section class="section" id="sides">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>დირექტორი ხედავს ყველაფერს. თანამშრომელი — მხოლოდ საკუთარს.</h2>
+        <p>ორივე მხარეს საკუთარი, გამიჯნული სივრცე აქვს — წვდომა იხსნება მხოლოდ რეგისტრაციის შემდეგ.</p>
+      </div>
+
+      <div class="sides-grid">
+        <article class="side-card side-card-light">
+          <div class="side-figure" aria-hidden="true">
+            <svg viewBox="0 0 16 30" fill="none"><circle cx="8" cy="4.5" r="4" fill="currentColor"/><rect x="0" y="10" width="16" height="20" rx="8" fill="currentColor"/></svg>
+          </div>
+          <div class="side-tag">დირექტორი / HR</div>
+          <h3>სრული კონტროლი გუნდის ადაპტაციაზე</h3>
+          <ul class="side-list">
+            <li>ვიდეოს, ტექსტისა და დოკუმენტების ატვირთვა ცალკე ველებით</li>
+            <li>ვადის დაწესება თითოეული მასალისთვის</li>
+            <li>თითოეული თანამშრომლის პროგრესის ცოცხალი სურათი</li>
+            <li>შეფასების ტიპის არჩევა — ტესტი ან წერითი ესე</li>
+            <li>ტესტისთვის 30 კითხვის შედგენა და დროის შეზღუდვა</li>
+            <li>პასუხებისა და ესეების შეფასება ერთ სივრცეში</li>
+          </ul>
+          <a class="side-btn side-btn-on-light" href="register-director.html">დარეგისტრირდი როგორც ზემდგომი</a>
+        </article>
+
+        <article class="side-card side-card-dark">
+          <div class="side-figure" aria-hidden="true">
+            <svg viewBox="0 0 16 30" fill="none"><circle cx="8" cy="4.5" r="4" fill="currentColor"/><rect x="0" y="10" width="16" height="20" rx="8" fill="currentColor"/></svg>
+          </div>
+          <div class="side-tag">თანამშრომელი</div>
+          <h3>მხოლოდ ის, რაც შენ გეხება</h3>
+          <ul class="side-list">
+            <li>პირადი დავალებების სია და ვადის ათვლა</li>
+            <li>ვიდეოს ყურება, ტექსტის კითხვა, ფაილების ჩამოტვირთვა</li>
+            <li>საკუთარი პროგრესის ნახვა ნებისმიერ დროს</li>
+            <li>ტესტი იხსნება მხოლოდ ვადის დადგომისას, შეზღუდული დროით</li>
+            <li>ესეს დაწერა პირდაპირ პლატფორმაზე, სიტყვების მოთხოვნით</li>
+            <li>საკუთარი შეფასების ნახვა — სხვისი შედეგები არ ჩანს</li>
+          </ul>
+          <a class="side-btn side-btn-on-dark" href="register-employee.html">დარეგისტრირდი როგორც თანამშრომელი</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ PRICING ══════════ -->
+  <section class="section price-section" id="pricing">
+    <div class="wrap">
+      <div class="section-head center">
+        <h2>ერთი ფასი, შეუზღუდავი გუნდი</h2>
+        <p>კომპანია იხდის ერთხელ თვეში — თანამშრომელს დამატებითი გადასახადი არასდროს სჭირდება.</p>
+      </div>
+      <div class="price-wrap">
+        <div class="price-frame">
+        <div class="price-aura" aria-hidden="true"></div>
+        <div class="price-card">
+          <div class="price-head">
+            <div class="price-figure lat" aria-label="$19.99">
+              <span class="price-cur">$</span><span class="price-int">19</span><span class="price-dec">.99</span>
+            </div>
+            <div class="price-period">თვეში, კომპანიაზე</div>
+            <p class="price-desc">იხსნება ყველა შესაძლებლობა დირექტორისთვის და შეუზღუდავი რაოდენობის თანამშრომლისთვის.</p>
+          </div>
+          <ul class="price-list">
+            <li><svg class="price-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.4 6.4 12 13 4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>შეუზღუდავი თანამშრომელთა რაოდენობა</li>
+            <li><svg class="price-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.4 6.4 12 13 4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>ვიდეო, ტექსტი და დოკუმენტები ერთ სივრცეში</li>
+            <li><svg class="price-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.4 6.4 12 13 4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>ტესტი ან ესე — თქვენი არჩევანით, დროის ლიმიტით</li>
+            <li><svg class="price-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.4 6.4 12 13 4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>პროგრესის თვალთვალი რეალურ დროში</li>
+            <li><svg class="price-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8.4 6.4 12 13 4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>კომპანიის უნიკალური კოდი, პაროლით დაცული</li>
+          </ul>
+          <a class="btn btn-light" href="#pricing" id="priceRegister">დაიწყეთ დღეს</a>
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-stack">
+    <div class="logo footer-logo">
+      <svg class="logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="11" cy="7.5" r="4" fill="#F2F5FB"/><rect x="7" y="12" width="8" height="16" rx="4" fill="#F2F5FB"/>
+        <circle cx="21.5" cy="7.5" r="4" fill="#A8BCE8"/><rect x="17.5" y="12" width="8" height="16" rx="4" fill="#A8BCE8"/>
+      </svg>HUDDLE
+    </div>
+    <p class="footer-tag">თანამშრომლის ადაპტაცია — მარტივად, ერთ სივრცეში.</p>
+    <nav class="footer-col" aria-label="პლატფორმა">
+      <!-- <span class="footer-title">პლატფორმა</span> -->
+      <a href="#how">როგორ მუშაობს</a>
+      <a href="#sides">დირექტორი &amp; თანამშრომელი</a>
+      <a href="#pricing">ფასი</a>
+    </nav>
+    <p class="footer-copy">© 2026 HUDDLE. ყველა უფლება დაცულია.</p>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
