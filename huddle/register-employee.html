@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ka" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>თანამშრომლის რეგისტრაცია — HUDDLE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@300;400;500;600;700&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="register.css">
+</head>
+<body class="reg-body">
+
+<!-- ══════════ LIGHT LAYER (identical to the home page) ══════════ -->
+<div class="lights" id="lights" aria-hidden="true">
+  <div class="light-bloom" id="lightBloom"></div>
+  <svg class="light-svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <linearGradient id="gBodyA" gradientUnits="userSpaceOnUse" x1="120" y1="760" x2="880" y2="180">
+        <stop offset="0"    stop-color="#1B2A55" stop-opacity="0"/>
+        <stop offset=".28"  stop-color="#4E76D6" stop-opacity=".55"/>
+        <stop offset=".52"  stop-color="#FFFFFF" stop-opacity="1"/>
+        <stop offset=".70"  stop-color="#8FA9E6" stop-opacity=".7"/>
+        <stop offset="1"    stop-color="#1B2A55" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="gBodyB" gradientUnits="userSpaceOnUse" x1="700" y1="1000" x2="1300" y2="520">
+        <stop offset="0"    stop-color="#1B2A55" stop-opacity="0"/>
+        <stop offset=".35"  stop-color="#4E76D6" stop-opacity=".5"/>
+        <stop offset=".62"  stop-color="#EAF0FF" stop-opacity=".95"/>
+        <stop offset="1"    stop-color="#1B2A55" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="gEdge" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0"   stop-color="#fff" stop-opacity="0"/>
+        <stop offset=".35" stop-color="#fff" stop-opacity=".95"/>
+        <stop offset=".8"  stop-color="#C4D2F5" stop-opacity=".5"/>
+        <stop offset="1"   stop-color="#C4D2F5" stop-opacity="0"/>
+      </linearGradient>
+      <filter id="fBlurBig" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="34"/></filter>
+      <filter id="fBlurMid" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="11"/></filter>
+      <filter id="fBlurEdge" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3.2"/></filter>
+    </defs>
+    <g id="ribbonA">
+      <path filter="url(#fBlurBig)" fill="url(#gBodyA)" opacity=".85"
+        d="M-160 250 C 250 205 540 380 790 760 C 860 866 930 970 1040 1090
+           L 620 1090 C 520 890 420 700 300 590 C 180 490 20 420 -160 430 Z"/>
+      <path filter="url(#fBlurMid)" fill="url(#gBodyA)" opacity=".9"
+        d="M-160 262 C 240 226 520 396 770 750 C 840 850 900 950 990 1060
+           L 700 1060 C 560 860 450 690 320 600 C 190 510 40 452 -160 458 Z"/>
+      <path filter="url(#fBlurEdge)" fill="none" stroke="url(#gEdge)" stroke-width="3.5" stroke-linecap="round"
+        d="M-160 252 C 240 214 530 386 780 756 C 850 858 915 955 1010 1075"/>
+    </g>
+    <g id="ribbonB">
+      <path filter="url(#fBlurBig)" fill="url(#gBodyB)" opacity=".8"
+        d="M560 1110 C 840 850 1150 640 1620 596 L 1620 960
+           C 1280 800 1030 930 900 1110 Z"/>
+      <path filter="url(#fBlurMid)" fill="url(#gBodyB)" opacity=".85"
+        d="M640 1100 C 900 860 1180 668 1620 630 L 1620 900
+           C 1300 786 1060 900 940 1100 Z"/>
+      <path filter="url(#fBlurEdge)" fill="none" stroke="url(#gEdge)" stroke-width="3" stroke-linecap="round"
+        d="M600 1108 C 870 860 1170 654 1620 612"/>
+    </g>
+  </svg>
+  <div class="light-spot" id="lightSpot"></div>
+</div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="logo" href="index.html" data-home aria-label="HUDDLE – მთავარი გვერდი">
+      <svg class="logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="11" cy="7.5" r="4" fill="#F2F5FB"/>
+        <rect x="7" y="12" width="8" height="16" rx="4" fill="#F2F5FB"/>
+        <circle cx="21.5" cy="7.5" r="4" fill="#A8BCE8"/>
+        <rect x="17.5" y="12" width="8" height="16" rx="4" fill="#A8BCE8"/>
+        <path d="M7 22c4-8 14-8 18.5-2v4C21 18 11 18 7 26z" fill="#F2F5FB" fill-opacity=".45"/>
+      </svg>
+      HUDDLE
+    </a>
+    <a class="home-btn" href="index.html" data-home>
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3m0 0 4-4M3 8l4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      მთავარ გვერდზე
+    </a>
+  </div>
+</header>
+
+<main class="reg-main">
+  <div class="reg-frame">
+    <div class="price-aura" aria-hidden="true"></div>
+    <div class="reg-card">
+
+      <section class="reg-step" id="stepForm">
+        <a class="card-home" href="index.html" data-home>
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3m0 0 4-4M3 8l4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          მთავარ გვერდზე დაბრუნება
+        </a>
+        <div class="reg-role">თანამშრომელი</div>
+        <h1>თანამშრომლის რეგისტრაცია</h1>
+        <p class="reg-sub">კომპანიის კოდი მოგაწოდათ დირექტორმა ან HR-მა. ის გაგაერთიანებთ თქვენი გუნდის სივრცეში.</p>
+
+        <form id="employeeForm" novalidate>
+          <div class="form-grid">
+            <div class="field" data-field="first">
+              <label for="first">სახელი</label>
+              <div class="input-wrap"><input id="first" name="first" type="text" autocomplete="given-name" placeholder="სახელი"></div>
+              <p class="field-error" aria-live="polite"></p>
+            </div>
+
+            <div class="field" data-field="last">
+              <label for="last">გვარი</label>
+              <div class="input-wrap"><input id="last" name="last" type="text" autocomplete="family-name" placeholder="გვარი"></div>
+              <p class="field-error" aria-live="polite"></p>
+            </div>
+
+            <div class="field full" data-field="phone">
+              <label for="phone">ტელეფონის ნომერი</label>
+              <div class="input-wrap"><input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+995 5XX XXX XXX"></div>
+              <p class="field-error" aria-live="polite"></p>
+            </div>
+
+            <div class="field full" data-field="email">
+              <label for="email">Gmail</label>
+              <div class="input-wrap"><input id="email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="name@gmail.com"></div>
+              <p class="field-error" aria-live="polite"></p>
+            </div>
+
+            <div class="field full" data-field="password">
+              <label for="password">პაროლი</label>
+              <div class="input-wrap">
+                <input id="password" name="password" type="password" autocomplete="new-password" placeholder="მინ. 8 სიმბოლო">
+                <button type="button" class="toggle-pass" data-target="password" aria-label="პაროლის ჩვენება">ჩვენება</button>
+              </div>
+              <p class="field-error" aria-live="polite"></p>
+            </div>
+
+            <div class="field full" data-field="confirm">
+              <label for="confirm">გაიმეორეთ პაროლი</label>
+              <div class="input-wrap">
+                <input id="confirm" name="confirm" type="password" autocomplete="new-password" placeholder="გაიმეორეთ პაროლი">
+                <button type="button" class="toggle-pass" data-target="confirm" aria-label="პაროლის ჩვენება">ჩვენება</button>
+              </div>
+              <p class="field-error" aria-live="polite"></p>
+            </div>
+
+            <div class="field full" data-field="code">
+              <label for="code">კომპანიის კოდი</label>
+              <div class="input-wrap"><input id="code" name="code" type="text" autocomplete="off" autocapitalize="characters" placeholder="მაგ. ORB-4471"></div>
+              <p class="field-error" aria-live="polite"></p>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary reg-submit" id="employeeSubmit">რეგისტრაცია</button>
+        </form>
+
+        <p class="reg-alt">დირექტორი ხართ? <a href="register-director.html">დარეგისტრირდით აქ</a></p>
+      </section>
+
+      <section class="reg-step" id="stepDone" hidden>
+        <div class="done-mark" aria-hidden="true">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8.4 6.4 12 13 4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h1>თქვენ წარმატებით გაიარეთ რეგისტრაცია</h1>
+        <p class="reg-sub">კომპანიის სივრცე თქვენი დავალებებითა და ვადებით მზადაა.</p>
+        <a class="btn btn-primary reg-submit" href="index.html" data-home>მთავარ გვერდზე დაბრუნება</a>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<script src="lights.js"></script>
+<script src="register.js"></script>
+</body>
+</html>
